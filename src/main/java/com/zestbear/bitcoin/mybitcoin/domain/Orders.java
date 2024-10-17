@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @Getter
-public class Order {
+public class Orders {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -5,7 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.zestbear.bitcoin.mybitcoin.config.UpbitAPIConfig;
-import com.zestbear.bitcoin.mybitcoin.domain.Order;
+import com.zestbear.bitcoin.mybitcoin.domain.Orders;
 import com.zestbear.bitcoin.mybitcoin.domain.OrderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
@@ -92,8 +92,8 @@ public class OrderAPI {
 
             String responseJson = EntityUtils.toString(entity, "UTF-8");
             ObjectMapper objectMapper = new ObjectMapper();
-            Order newOrder = objectMapper.readValue(responseJson, Order.class);
-            orderRepository.save(newOrder);
+            Orders newOrders = objectMapper.readValue(responseJson, Orders.class);
+            orderRepository.save(newOrders);
 
             System.out.println(EntityUtils.toString(entity, "UTF-8"));
         } catch(NoSuchAlgorithmException | UnsupportedEncodingException e){

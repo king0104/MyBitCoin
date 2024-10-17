@@ -35,7 +35,6 @@ public class OrderService {
         this.lossRatio = lossRatio;
         this.getRatio = getRatio;
     }
-
     public void sendOrder() throws IOException, NoSuchAlgorithmException {
         String[] coinSymbols = {"BTC", "ETH", "ETC", "SOL", "DOT"};
         double cashKRW = currentAsset.getCashKRW();                             // 현금 보유량
@@ -56,8 +55,8 @@ public class OrderService {
                 log.info("MA Timing for {}: {}", symbol, maTiming); // 로그 추가
                 log.info("RSI Value for {}: {}", symbol, rsiValue); // 로그 추가
                 if ((maTiming.equals("bid") && rsiValue < 25) || rsiValue < 15) {
-                    if (cashKRW >= 30000) {
-                        String price = String.valueOf(30000);
+                    if (cashKRW >= 10000) {
+                        String price = String.valueOf(10000);
                         log.info("Placing buy order for {}: {}", symbol, price); // 로그 추가
                         orderAPI.postOrder("bid", "KRW-" + symbol, price, null);
                     }
@@ -70,7 +69,7 @@ public class OrderService {
                 log.info("Gain ratio for {}: {}", symbol, gainRatio); // 로그 추가
                 log.info("RSI Value for {}: {}", symbol, rsiValue); // 로그 추가
                 if (gainRatio >= 0.005) {
-                    if ((maComparison.isMATiming(symbol).equals("ask") && rsiValue > 70) || lossRatio.isLoss(symbol) || gainRatio >= 0.035 || rsiValue > 83) {
+                    if ((maComparison.isMATiming(symbol).equals("ask") && rsiValue > 70) || lossRatio.isLoss(symbol) || gainRatio >= 0.01 || rsiValue > 83) {
                         double volume = eachValues.get(symbol) / currentValues.get("KRW-" + symbol);
                         log.info("Placing sell order for {}: Volume {}", symbol, volume); // 로그 추가
                         orderAPI.postOrder("ask", "KRW-" + symbol, null, String.format("%.8f", volume));

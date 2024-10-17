@@ -8,10 +8,8 @@ import java.util.Map;
 
 @Service
 public class GetRatio {
-
     private final CurrentAsset currentAsset;
     private final CurrentValueAPI currentValueAPI;
-
     public GetRatio(CurrentAsset currentAsset, CurrentValueAPI currentValueAPI) {
         this.currentAsset = currentAsset;
         this.currentValueAPI = currentValueAPI;
